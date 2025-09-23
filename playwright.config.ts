@@ -20,7 +20,10 @@ export default defineConfig({
   use: {
     baseURL,
     extraHTTPHeaders: {
-      ...(process.env.API_TOKEN ? { Authorization: `Bearer ${process.env.API_TOKEN}` } : {}),
+      // Only send Authorization if explicitly enabled (avoid 401s on public APIs like reqres)
+      ...((process.env.API_TOKEN && process.env.USE_AUTH === 'true')
+        ? { Authorization: `Bearer ${process.env.API_TOKEN}` }
+        : {}),
       // Support reqres (or other) API key via env
       ...(process.env.X_API_KEY ? { 'x-api-key': process.env.X_API_KEY } : {}),
     },

@@ -12,11 +12,6 @@ type User = {
   [key: string]: any;
 };
 
-// function randomEmail(prefix = 'user'): string {
-//   const suffix = Math.random().toString(36).slice(2, 8);
-//   return `${prefix}.${suffix}@example.com`;
-// }
-
 // Skip authenticated CRUD tests if API key is not available (e.g., PRs from forks)
 const hasApiKey = !!process.env.X_API_KEY;
 
