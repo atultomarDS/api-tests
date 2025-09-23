@@ -1,0 +1,18 @@
+{
+  "create": {
+    "name": "morpheus",
+    "job": "leader"
+  },
+  "updatePut": {
+    "name": "morpheus",
+    "job": "zion resident"
+  },
+  "fixedIds": {
+    "fetch": 2,
+    "update": 2,
+    "delete": 2
+  },
+  "list": {
+    "page": 1
+  }
+}

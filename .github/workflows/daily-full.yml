@@ -1,0 +1,50 @@
+name: Daily Full API Tests
+
+on:
+  schedule:
+    # Runs every day at 07:00 UTC
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  full:
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: ${{ secrets.BASE_URL || 'http://localhost:3000' }}
+      API_TOKEN: ${{ secrets.API_TOKEN }}
+      REQRES_BASE_URL: ${{ secrets.REQRES_BASE_URL || 'https://reqres.in/api' }}
+      API_RETRY_MAX: ${{ vars.API_RETRY_MAX || 2 }}
+      API_RETRY_BASE_MS: ${{ vars.API_RETRY_BASE_MS || 300 }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run full test suite
+        run: npm test
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-html-report
+          path: reports/html
+          if-no-files-found: ignore
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-test-results
+          path: test-results
+          if-no-files-found: ignore
+
+
