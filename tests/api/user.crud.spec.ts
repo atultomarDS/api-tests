@@ -17,7 +17,11 @@ type User = {
 //   return `${prefix}.${suffix}@example.com`;
 // }
 
+// Skip authenticated CRUD tests if API key is not available (e.g., PRs from forks)
+const hasApiKey = !!process.env.X_API_KEY;
+
 test.describe.serial('User CRUD', () => {
+  test.skip(!hasApiKey, 'X_API_KEY not set; skipping authenticated CRUD tests');
   let userId: string | number | undefined;
 
   test('create user', async ({ apiClient }) => {
