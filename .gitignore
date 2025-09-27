@@ -1,5 +1,7 @@
 node_modules/
 .env
+.env.iron
 reports/
 test-results/
 !env.example
+!env.iron.example

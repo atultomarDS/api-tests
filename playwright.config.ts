@@ -2,10 +2,14 @@ import { defineConfig } from '@playwright/test';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
-// Load environment variables from .env if present
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+// Determine environment from command line or default to reqres
+const environment = process.env.TEST_ENV || 'reqres';
 
-const baseURL = process.env.BASE_URL || 'https://reqres.in/api';
+// Load environment-specific .env file
+const envFile = environment === 'iron' ? '.env.iron' : '.env';
+dotenv.config({ path: path.resolve(__dirname, envFile) });
+
+const baseURL = process.env.BASE_URL || (environment === 'iron' ? 'https://api.ironmcb.com' : 'https://reqres.in/api');
 
 export default defineConfig({
   testDir: 'tests',

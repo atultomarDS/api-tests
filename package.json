@@ -4,7 +4,11 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test:reqres": "TEST_ENV=reqres playwright test",
+    "test:iron": "TEST_ENV=iron playwright test",
     "test:ui": "playwright test --ui | cat",
+    "test:ui:reqres": "TEST_ENV=reqres playwright test --ui | cat",
+    "test:ui:iron": "TEST_ENV=iron playwright test --ui | cat",
     "report": "playwright show-report",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
@@ -21,6 +25,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@ironxyz/mcp-server": "^0.1.1",
     "dotenv": "^17.2.2"
   }
 }
