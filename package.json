@@ -9,6 +9,8 @@
     "test:ui": "playwright test --ui | cat",
     "test:ui:reqres": "TEST_ENV=reqres playwright test --ui | cat",
     "test:ui:iron": "TEST_ENV=iron playwright test --ui | cat",
+    "test:agent": "playwright test tests/agent/",
+    "test:agent:demo": "node scripts/run-agent.js",
     "report": "playwright show-report",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
