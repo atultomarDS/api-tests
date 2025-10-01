@@ -299,3 +299,78 @@ export class SecurityAgent {
 }
 
 export default SecurityAgent;
+
+// General API Testing Agent exports
+export { default as ApiTesterAgent } from './api-tester-agent';
+export { default as TestRunner } from './test-runner';
+export { default as TestGenerator } from './test-generator';
+
+// Re-export types from general API testing
+export type {
+  TestResult,
+  TestSuite,
+  TestCase,
+  ApiAnalysis,
+  EndpointInfo,
+  SecurityIssue,
+  PerformanceIssue
+} from './api-tester-agent';
+
+export type {
+  TestRunConfig,
+  TestRunResult
+} from './test-runner';
+
+export type {
+  ApiSpec,
+  EndpointSpec,
+  ParameterSpec,
+  RequestBodySpec,
+  ResponseSpec,
+  SecuritySpec,
+  PerformanceSpec,
+  AuthSpec,
+  RateLimitSpec,
+  ValidationSpec
+} from './test-generator';
+
+// Factory functions for easy instantiation
+import ApiTesterAgent from './api-tester-agent';
+import TestRunner from './test-runner';
+import TestGenerator from './test-generator';
+import { TestRunConfig } from './test-runner';
+import { ApiSpec } from './test-generator';
+
+/**
+ * Create an API Tester Agent instance
+ */
+export function createApiTesterAgent(apiClient: ApiClient): ApiTesterAgent {
+  return new ApiTesterAgent(apiClient);
+}
+
+/**
+ * Create a Test Runner instance with default configuration
+ */
+export function createTestRunner(apiClient: ApiClient, config?: Partial<TestRunConfig>): TestRunner {
+  const defaultConfig: TestRunConfig = {
+    environment: 'test',
+    baseUrl: 'https://api.example.com',
+    timeout: 30000,
+    retries: 3,
+    parallel: false,
+    maxConcurrency: 5,
+    generateReport: true,
+    reportFormat: 'markdown',
+    outputDir: './test-results',
+    ...config
+  };
+  
+  return new TestRunner(apiClient, defaultConfig);
+}
+
+/**
+ * Create a Test Generator instance
+ */
+export function createTestGenerator(apiSpec: ApiSpec): TestGenerator {
+  return new TestGenerator(apiSpec);
+}
