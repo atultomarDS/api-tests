@@ -1,8 +1,11 @@
 import { test, expect } from '../../src/fixtures/api-fixtures';
 import { expectFailure } from '../../src/utils/api-assertions';
 
-// Skip if not Iron environment
-test.skip(process.env.TEST_ENV !== 'iron', 'Iron MCB tests only');
+// Skip if not Iron environment or if running in CI without proper setup
+test.skip(
+  process.env.TEST_ENV !== 'iron' || (process.env.CI && !process.env.API_TOKEN),
+  'Iron MCB tests require TEST_ENV=iron and API_TOKEN (or run locally)'
+);
 
 test.describe('Iron MCB - Security Tests', () => {
   test.describe('Authentication & Authorization', () => {

@@ -15,6 +15,10 @@ jobs:
       X_API_KEY: ${{ secrets.X_API_KEY }}
       API_RETRY_MAX: ${{ vars.API_RETRY_MAX }}
       API_RETRY_BASE_MS: ${{ vars.API_RETRY_BASE_MS }}
+      # Iron MCB environment variables (optional for CI)
+      IRON_API_TOKEN: ${{ secrets.IRON_API_TOKEN }}
+      IRON_BASE_URL: ${{ secrets.IRON_BASE_URL }}
+      IRON_TEST_ACCOUNT_ID: ${{ secrets.IRON_TEST_ACCOUNT_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,8 +36,16 @@ jobs:
         if: ${{ env.BASE_URL != '' }}
         run: echo "BASE_URL=${{ env.BASE_URL }}" >> $GITHUB_ENV
 
-      - name: Run full test suite
-        run: npm test
+      - name: Run reqres tests
+        run: npm run test:reqres
+
+      - name: Run Iron MCB tests (if credentials available)
+        if: ${{ env.IRON_API_TOKEN != '' }}
+        env:
+          TEST_ENV: iron
+          API_TOKEN: ${{ env.IRON_API_TOKEN }}
+          BASE_URL: ${{ env.IRON_BASE_URL || 'https://api.ironmcb.com' }}
+        run: npm run test:iron
 
       - name: Upload HTML report
         if: always()
