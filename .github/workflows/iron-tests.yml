@@ -28,7 +28,9 @@ jobs:
     env:
       TEST_ENV: iron
       IRON_ENVIRONMENT: ${{ github.event.inputs.environment || 'staging' }}
+      BASE_URL: ${{ secrets.IRON_BASE_URL || 'https://api.ironmcb.com' }}
       API_TOKEN: ${{ secrets.IRON_API_TOKEN }}
+      USE_AUTH: 'true'
       IRON_CLIENT_ID: ${{ secrets.IRON_CLIENT_ID }}
       IRON_CLIENT_SECRET: ${{ secrets.IRON_CLIENT_SECRET }}
       IRON_TEST_CUSTOMER_ID: ${{ secrets.IRON_TEST_CUSTOMER_ID }}
@@ -66,7 +68,9 @@ jobs:
     env:
       TEST_ENV: iron
       IRON_ENVIRONMENT: ${{ github.event.inputs.environment || 'staging' }}
+      BASE_URL: ${{ secrets.IRON_BASE_URL || 'https://api.ironmcb.com' }}
       API_TOKEN: ${{ secrets.IRON_API_TOKEN }}
+      USE_AUTH: 'true'
       IRON_CLIENT_ID: ${{ secrets.IRON_CLIENT_ID }}
       IRON_CLIENT_SECRET: ${{ secrets.IRON_CLIENT_SECRET }}
       IRON_TEST_CUSTOMER_ID: ${{ secrets.IRON_TEST_CUSTOMER_ID }}
@@ -104,7 +108,9 @@ jobs:
     env:
       TEST_ENV: iron
       IRON_ENVIRONMENT: ${{ github.event.inputs.environment || 'staging' }}
+      BASE_URL: ${{ secrets.IRON_BASE_URL || 'https://api.ironmcb.com' }}
       API_TOKEN: ${{ secrets.IRON_API_TOKEN }}
+      USE_AUTH: 'true'
       IRON_CLIENT_ID: ${{ secrets.IRON_CLIENT_ID }}
       IRON_CLIENT_SECRET: ${{ secrets.IRON_CLIENT_SECRET }}
       IRON_TEST_CUSTOMER_ID: ${{ secrets.IRON_TEST_CUSTOMER_ID }}
@@ -143,7 +149,9 @@ jobs:
     env:
       TEST_ENV: iron
       IRON_ENVIRONMENT: ${{ github.event.inputs.environment || 'staging' }}
+      BASE_URL: ${{ secrets.IRON_BASE_URL || 'https://api.ironmcb.com' }}
       API_TOKEN: ${{ secrets.IRON_API_TOKEN }}
+      USE_AUTH: 'true'
       IRON_CLIENT_ID: ${{ secrets.IRON_CLIENT_ID }}
       IRON_CLIENT_SECRET: ${{ secrets.IRON_CLIENT_SECRET }}
       IRON_TEST_CUSTOMER_ID: ${{ secrets.IRON_TEST_CUSTOMER_ID }}

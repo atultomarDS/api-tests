@@ -45,6 +45,7 @@ jobs:
           TEST_ENV: iron
           API_TOKEN: ${{ env.IRON_API_TOKEN }}
           BASE_URL: ${{ env.IRON_BASE_URL || 'https://api.ironmcb.com' }}
+          USE_AUTH: 'true'
         run: npm run test:iron
 
       - name: Upload HTML report
